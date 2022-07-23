@@ -1,0 +1,6 @@
+<div class="pie animated"
+  [ngClass]="{ 'animate': animated, 'no-round': !rounded }"
+  [ngStyle]="{ '--value': value, '--background': backgroundColor, '--ringWidth': ringWidth }">
+  <ng-content></ng-content>
+</div>
+

@@ -1,0 +1,61 @@
+@property --value {
+  syntax: '<number>';
+  inherits: true;
+  initial-value: 0;
+}
+
+.pie {
+  --value: 20;
+  --ringWidth: 22px;
+  --background: darkred;
+  --w: 150px;
+
+  width: var(--w);
+  aspect-ratio: 1;
+  position: relative;
+  display: inline-grid;
+  margin: 5px;
+  place-content: center;
+  font-size: 25px;
+  font-weight: bold;
+  font-family: sans-serif;
+}
+
+.pie:before,
+.pie:after {
+  content: '';
+  position: absolute;
+  border-radius: 50%;
+}
+
+.pie:before {
+  inset: 0;
+  background: radial-gradient(farthest-side, var(--background) 100%, transparent) top/var(--ringWidth) var(--ringWidth) no-repeat,
+    conic-gradient(var(--background) calc(var(--value) * 1%), transparent 0);
+  -webkit-mask: radial-gradient(farthest-side, transparent calc(99% - var(--ringWidth)), #000 calc(100% - var(--ringWidth)));
+  mask: radial-gradient(farthest-side, transparent calc(99% - var(--ringWidth)), #000 calc(100% - var(--ringWidth)));
+}
+
+.pie:after {
+  inset: calc(50% - var(--ringWidth) / 2);
+  background: var(--background);
+  transform: rotate(calc(var(--value) * 3.6deg)) translateY(calc(50% - var(--w) / 2));
+}
+
+.animate {
+  animation: p 1s 0.5s both;
+}
+
+.no-round:before {
+  background-size: 0 0, auto;
+}
+
+.no-round:after {
+  content: none;
+}
+
+@keyframes p {
+  from {
+    --value: 0;
+  }
+}
